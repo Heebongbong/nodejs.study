@@ -18,6 +18,7 @@ const { sequelize } = require("./src/models/index");
 const passportConfig = require('./src/passport/config')
 
 const app = express();
+passportConfig();
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'html')
 
@@ -59,7 +60,6 @@ app.use((req,res, next)=>{
     next(error);
 })
 app.use((err,req,res,next)=>{
-    console.log('err')
     res.locals.message = err.message;
     res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
     res.status(err.status || 500);
