@@ -1,19 +1,22 @@
 const User = require("../../../models/user");
+const Post = require("../../../models/post");
 
-const HomeSvc = {
-    getMain : async (req, res, next) => {
-        const twits = [];
-        try{
-            const f = await User.findAll();
-            console.log(f)
-        }catch(e){
-            console.error(e);
-        }
-        res.render('index', {
-            title: 'NodeBird',
-            twits,
+exports.getMain = async (req, res, next)=> {
+    let twits = [];
+    try{
+        const f = await User.findAll();
+        twits = await Post.findAll({
+            include: {
+                model: User,
+                attributes: ['id', 'nick'],
+            },
+            order : [['createdAt','DESC']],
         });
+    }catch(e){
+        console.error(e);
     }
+    res.render('index', {
+        title: 'NodeBird',
+        twits
+    });
 }
-
-module.exports = HomeSvc

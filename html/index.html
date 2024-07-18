@@ -6,7 +6,7 @@
     <div>
         <form id="twit-form" action="/post" method="post" enctype="multipart/form-data">
             <div class="input-group">
-                <textarea id="twit" name="content" maxlength="140"></textarea>
+                <textarea id="twit" name="contents" maxlength="140"></textarea>
             </div>
             <div class="img-preview">
                 <img id="img-preview" src="" style="display: none;" width="250" alt="미리보기">
@@ -33,7 +33,7 @@
             {% if not followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
             <button class="twit-follow">팔로우하기</button>
             {% endif %}
-            <div class="twit-content">{{twit.content}}</div>
+            <div class="twit-content">{{twit.contents}}</div>
             {% if twit.img %}
             <div class="twit-img"><img src="{{twit.img}}" alt="섬네일"></div>
             {% endif %}
