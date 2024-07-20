@@ -5,6 +5,7 @@ const userCtrl = require('../../user/ctrl/userCtrl')
 const authCtrl = require('../../auth/ctrl/authCtrl')
 const postCtrl = require('../../post/ctrl/postCtrl')
 const hashCtrl = require('../../hash/ctrl/hashCtrl')
+const testCtrl = require('../../test/testCtrl')
 
 router.use((req, res, next)=>{
     res.locals.user = req.user;
@@ -18,6 +19,7 @@ router.use('/user', userCtrl)
 router.use('/auth', authCtrl)
 router.use('/post', postCtrl)
 router.use('/hash', hashCtrl)
+router.use('/test', testCtrl)
 
 router.get('/', getMain);
 
