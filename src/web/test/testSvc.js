@@ -21,7 +21,7 @@ const apiGet = async (req, obj) => {
             delete req.session.jwt;
             return apiGet(req, obj)
         }
-        throw e.response;
+        return e.response;
     }
 }
 
@@ -30,7 +30,7 @@ exports.test = async (req, res, next) => {
         const result = await apiGet(req, {
             url: '/test', headers: {authorization: req.session.jwt }
         });
-        if(result.data?.code !== 200) return res.stats(result.data?.code).json(result.data)
+        if(result.data?.code !== 200) return res.status(result.data?.code).json(result.data)
         return res.json(result.data)
     } catch (e) {
         console.error(e)
@@ -47,7 +47,7 @@ exports.getMyPosts = async (req, res, next) => {
             url: '/posts/my',
             headers: { authorization: req.session.jwt }
         });
-        if(result.data?.code !== 200) return res.stats(result.data?.code).json(result.data)
+        if(result.data?.code !== 200) return res.status(result.data?.code).json(result.data)
         res.json(result.data)
     } catch (e) {
         console.error(e)
@@ -61,7 +61,7 @@ exports.searchByHashtag = async (req, res, next) => {
             url: `/posts/hashtag/${req.params.hashtag}`,
             headers: {authorization: req.session.jwt }
         })
-        if(result.data?.code !== 200) return res.stats(result.data?.code).json(result.data)
+        if(result.data?.code !== 200) return res.status(result.data?.code).json(result.data)
         res.json(result.data)
     }catch (e) {
         console.error(e)
